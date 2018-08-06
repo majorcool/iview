@@ -46,10 +46,7 @@
                             placement: this.placement,
                             modifiers: {
                                 computeStyle:{
-                                    gpuAcceleration: false
-                                },
-                                preventOverflow :{
-                                    boundariesElement: 'window'
+                                    gpuAcceleration: false,
                                 }
                             },
                             onCreate:()=>{
@@ -79,16 +76,8 @@
                 }
             },
             resetTransformOrigin() {
-                // 不判断，Select 会报错，不知道为什么
-                if (!this.popper) return;
-
-                let x_placement = this.popper.popper.getAttribute('x-placement');
-                let placementStart = x_placement.split('-')[0];
-                let placementEnd = x_placement.split('-')[1];
-                const leftOrRight = x_placement === 'left' || x_placement === 'right';
-                if(!leftOrRight){
-                    this.popper.popper.style.transformOrigin = placementStart==='bottom' || ( placementStart !== 'top' && placementEnd === 'start') ? 'center top' : 'center bottom';
-                }
+                let placement = this.popper.popper.getAttribute('x-placement').split('-')[0];
+                this.popper.popper.style.transformOrigin = placement==='bottom'?'center top':'center bottom';
             }
         },
         created () {
