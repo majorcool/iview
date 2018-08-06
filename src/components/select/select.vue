@@ -71,6 +71,7 @@
     </div>
 </template>
 <script>
+    import Icon from '../icon';
     import Drop from './dropdown.vue';
     import {directive as clickOutside} from 'v-click-outside-x';
     import TransferDom from '../../directives/transfer-dom';
@@ -140,7 +141,7 @@
     export default {
         name: 'iSelect',
         mixins: [ Emitter, Locale ],
-        components: { FunctionalOptions, Drop, SelectHead },
+        components: { FunctionalOptions, Drop, Icon, SelectHead },
         directives: { clickOutside, TransferDom },
         props: {
             value: {
@@ -187,9 +188,6 @@
             size: {
                 validator (value) {
                     return oneOf(value, ['small', 'large', 'default']);
-                },
-                default () {
-                    return this.$IVIEW.size === '' ? 'default' : this.$IVIEW.size;
                 }
             },
             labelInValue: {
@@ -207,9 +205,7 @@
             },
             transfer: {
                 type: Boolean,
-                default () {
-                    return this.$IVIEW.transfer === '' ? false : this.$IVIEW.transfer;
-                }
+                default: false
             },
             // Use for AutoComplete
             autoComplete: {
